@@ -548,6 +548,11 @@ jobs:
           ' "$KBUILD_FILE" > "${KBUILD_FILE}.tmp" && mv "${KBUILD_FILE}.tmp" "$KBUILD_FILE"
 
           echo "已更新 get_ksu_version_full 模板: $VERSION_TEMPLATE"
+          
+      - name: 禁用 SukiSU SafeMode
+        working-directory: ${{ env.KERNEL_ROOT }}/common
+        run: |
+          python3 $GITHUB_WORKSPACE/disable_sukisu_safemode.py
 
       - name: 应用 SUSFS 补丁
         if: inputs.enable_susfs
